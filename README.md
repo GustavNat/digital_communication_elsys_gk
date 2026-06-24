@@ -6,6 +6,12 @@ I dette prosjektet skal dere gjøre det på en litt upraktisk, men lærerik måt
 
 Metoden kalles **FSK**, eller [Frequency Shift Keying](https://en.wikipedia.org/wiki/Frequency-shift_keying). Ideen er enkel: en frekvens betyr `0`, og en annen frekvens betyr `1`. Selv om dette prosjektet bruker lyd, er prinsippet det samme som i mange ekte kommunikasjonssystemer. Bluetooth LE bruker en variant kalt **GFSK**, eller **Gaussian Frequency Shift Keying**.
 
+## Oppsett
+
+Langt fra ferdig! Her må det være en forklaring av oppsettet og komponentene. Kretsdiagram!
+
+ESP32 -> Høytaler -> Mikrofon -> ADC -> Raspberry pi
+
 ## Kode
 
 Dere får litt hjelp med å sette i gang.
