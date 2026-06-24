@@ -1,8 +1,8 @@
 # Digital kommunikasjon
 
-Digital kommunikasjon handler om å sende informasjon fra én enhet til en annen. Informasjonen kan være tekst, lyd, bilde, video eller sensordata. Hvordan informasjonen sendes avhenger blant annet av datatype, avstand, hastighet, strømforbruk, sikkerhet og hvor mye støy det er i omgivelsene.
+Digital kommunikasjon handler om å sende informasjon fra én enhet til en annen. Informasjonen kan være tekst, lyd, bilde, video eller sensordata. Hvordan informasjonen sendes avhenger blant annet av datatype, avstand, hastighet, sikkerhet og hvor mye støy det er i omgivelsene.
 
-I dette prosjektet skal dere gjøre det på en litt upraktisk, men veldig lærerik måte: Dere skal sende digitale bits som lyd. En ESP32 spiller av to ulike frekvenser gjennom en høyttaler, og en Raspberry Pi bruker mikrofon til å finne ut hva som ble sendt.
+I dette prosjektet skal dere gjøre det på en litt upraktisk, men lærerik måte: Dere skal sende digitale bits som lyd. En ESP32 spiller av to ulike frekvenser gjennom en høyttaler, og en Raspberry Pi bruker mikrofon til å finne ut hva som ble sendt.
 
 Metoden kalles **FSK**, eller [Frequency Shift Keying](https://en.wikipedia.org/wiki/Frequency-shift_keying). Ideen er enkel: én frekvens betyr `0`, og en annen frekvens betyr `1`. Selv om dette prosjektet bruker lyd i stedet for radio, er prinsippet det samme som i mange ekte kommunikasjonssystemer. Bluetooth LE bruker en variant kalt **GFSK**, eller **Gaussian Frequency Shift Keying**.
 
@@ -121,5 +121,16 @@ Når dere er koblet til, kan dere dra filer mellom laptopen og Raspberry Pi-en. 
 /home/pi/
 ````
 
+## Kjøre kode på Raspberry Pi
 
+For å kjøre kode på raspberry pi må dere først skrive i terminalen:
 
+```bash
+make
+```
+
+og så:
+
+```bash
+sudo python3 main.py 
+```
