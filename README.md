@@ -1,10 +1,10 @@
 # Digital kommunikasjon
 
-Digital kommunikasjon handler om å sende informasjon fra én enhet til en annen. Informasjonen kan være tekst, lyd, bilde, video eller sensordata. Hvordan informasjonen sendes avhenger blant annet av datatype, avstand, hastighet, strømforbruk, sikkerhet og hvor mye støy det er i omgivelsene.
+Digital kommunikasjon handler om å sende informasjon fra én enhet til en annen. Informasjonen kan være tekst, lyd, bilde, video eller sensordata. Hvordan informasjonen sendes avhenger blant annet av datatype, avstand, hastighet, sikkerhet og hvor mye støy det er i omgivelsene.
 
-I dette prosjektet skal dere gjøre det på en litt upraktisk, men veldig lærerik måte: Dere skal sende digitale bits som lyd. En ESP32 spiller av to ulike frekvenser gjennom en høyttaler, og en Raspberry Pi bruker mikrofon til å finne ut hva som ble sendt.
+I dette prosjektet skal dere gjøre det på en litt upraktisk, men lærerik måte: Dere skal sende digitale bits som lyd. En ESP32 spiller av to ulike frekvenser gjennom en høyttaler, og en Raspberry Pi bruker mikrofon til å finne ut hva som ble sendt.
 
-Metoden kalles **FSK**, eller [Frequency Shift Keying](https://en.wikipedia.org/wiki/Frequency-shift_keying). Ideen er enkel: én frekvens betyr `0`, og en annen frekvens betyr `1`. Selv om dette prosjektet bruker lyd i stedet for radio, er prinsippet det samme som i mange ekte kommunikasjonssystemer. Bluetooth LE bruker en variant kalt **GFSK**, eller **Gaussian Frequency Shift Keying**.
+Metoden kalles **FSK**, eller [Frequency Shift Keying](https://en.wikipedia.org/wiki/Frequency-shift_keying). Ideen er enkel: en frekvens betyr `0`, og en annen frekvens betyr `1`. Selv om dette prosjektet bruker lyd, er prinsippet det samme som i mange ekte kommunikasjonssystemer. Bluetooth LE bruker en variant kalt **GFSK**, eller **Gaussian Frequency Shift Keying**.
 
 ## Kode
 
@@ -17,6 +17,8 @@ Dere får litt hjelp med å sette i gang.
 I `main.py` er det et lite eksempel på hvordan disse filene kan brukes. Hvis dere holder pekeren over `fsk_decoder()` vil det dukke opp en kort forklaring av funksjonen.
 
 For at mottaker skal vite hvor i opptaket meldingen er, så er det greit med et signal som signaliserer dette. Det viser seg at noen slike signal er bedre egnet enn andre. Mine tips er å se på [Barker code](https://en.wikipedia.org/wiki/Barker_code) eller [MLS](https://en.wikipedia.org/wiki/Maximum_length_sequence).
+
+Valg av frekvenser vil ha en stor påvirkning på hvor godt kommunikasjonssystemet deres fungerer. Velg med omhu! Unngå å velg de samme frekvensene som de rundt deg. Hvis dere trenger inspirasjon, kan dere se på den gamle standarden [Bell 202](https://en.wikipedia.org/wiki/Bell_202).
 
 ## Raspberry Pi oppsett
 1. Last ned Raspberry Pi Imager 
@@ -118,3 +120,6 @@ Når dere er koblet til, kan dere dra filer mellom laptopen og Raspberry Pi-en. 
 ```bash
 /home/pi/
 ````
+
+
+
