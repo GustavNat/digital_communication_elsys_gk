@@ -1,10 +1,3 @@
-"""
-fsk_decoder.py – Decode a binary FSK recording to bits.
-
-Bit 0 = f0 Hz, Bit 1 = f1 Hz, bit_time seconds each.
-Usage: python fsk_decoder.py <recording.dat>
-"""
-
 import sys
 import numpy as np
 from scipy.signal import butter, filtfilt
