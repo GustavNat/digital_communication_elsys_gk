@@ -1,4 +1,4 @@
-# Lydbasert trådløs digital kommunikasjon
+# Digital kommunikasjon
 
 Digital kommunikasjon handler om å sende informasjon fra én enhet til en annen. Informasjonen kan være tekst, lyd, bilde, video eller sensordata. Hvordan informasjonen sendes avhenger blant annet av datatype, avstand, hastighet, strømforbruk, sikkerhet og hvor mye støy det er i omgivelsene.
 
@@ -118,6 +118,3 @@ Når dere er koblet til, kan dere dra filer mellom laptopen og Raspberry Pi-en. 
 ```bash
 /home/pi/
 ````
-
-
-

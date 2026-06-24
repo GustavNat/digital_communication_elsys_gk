@@ -90,8 +90,8 @@ def find_stop(bits, stop_signal, bits_per_symbol):
     return len(bits)
 
 
-def fsk_decoder(path, f0, f1, bit_time, start_signal=None, stop_signal=None,
-                bits_per_symbol=5, channels=1, channel=0):
+def fsk_decoder(path, f0, f1, bit_time, bits_per_symbol,
+                start_signal=None, stop_signal=None, channels=1, channel=0):
     """
     Decode an FSK recording and return a list of bits.
 
@@ -99,11 +99,11 @@ def fsk_decoder(path, f0, f1, bit_time, start_signal=None, stop_signal=None,
     f0:           Frequency (Hz) used for bit 0 by the transmitter.
     f1:           Frequency (Hz) used for bit 1 by the transmitter.
     bit_time:     How long one bit lasts in seconds.
+    bits_per_symbol: Number of bits per symbol.
     start_signal: Known bit sequence marking the start of the message.
                   If not given, decoding starts from the beginning of the file.
     stop_signal:  Known bit sequence marking the end of the message.
                   If not given, decoding continues to the end of the file.
-    bits_per_symbol:   Number of bits per letter (default 5).
     channel:      Which ADC channel to decode (default 0).
     """
     sample_period, data = raspi_import(path, channels=channels)
