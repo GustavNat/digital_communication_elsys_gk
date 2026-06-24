@@ -123,20 +123,3 @@ def fsk_decoder(path, f0, f1, bit_time, bits_per_symbol,
         bits = bits[:stop_idx]
 
     return bits
-
-
-if __name__ == '__main__':
-    if len(sys.argv) < 2:
-        print("Usage: python fsk_decoder.py <recording.dat>")
-        sys.exit(1)
-
-    result = fsk_decoder(
-        sys.argv[1],
-        f0=1500,
-        f1=1820,
-        bit_time=0.05,
-        start_signal=[1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1],
-        stop_signal=[1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1],
-        bits_per_symbol=5,
-    )
-    print(f"\nDecoded bits: {result}")

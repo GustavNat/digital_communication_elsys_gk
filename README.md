@@ -71,6 +71,8 @@ Dere kan laste ned `pigpio` direkte med:
 wget https://github.com/joan2937/pigpio/archive/master.zip
 ```
 
+`wget` står for "world wide web get". Dere kan gjette hva den gjør:)
+
 Pakk deretter ut filen:
 
 ```bash
@@ -95,7 +97,7 @@ Installer biblioteket:
 sudo make install
 ```
 
-Kommandoen `make` bruker en fil som heter `Makefile` til å finne ut hvordan programmet skal kompileres. Kommandoen `sudo make install` installerer biblioteket slik at det kan brukes av andre programmer på Raspberry Pi-en.
+Kommandoen `make` bruker en fil som heter `Makefile` til å finne ut hvordan programmet skal kompileres. Kommandoen `sudo make install` installerer biblioteket slik at det kan brukes av andre programmer på Raspberry Pi-en. `sudo` står for "superuser do" og kjører kommandoen som administrator. 
 
 ## Filoverføring med SFTP
 
@@ -120,6 +122,18 @@ Når dere er koblet til, kan dere dra filer mellom laptopen og Raspberry Pi-en. 
 ```bash
 /home/pi/
 ````
+## Kjøre kode på Raspberry Pi
 
+For å kjøre kode på raspberry pi må dere først skrive i terminalen:
+
+```bash
+make
+```
+
+og så:
+
+```bash
+sudo python3 main.py 
+```
 
 
