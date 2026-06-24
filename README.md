@@ -18,7 +18,7 @@ I `main.py` er det et lite eksempel på hvordan disse filene kan brukes. Hvis de
 
 For at mottaker skal vite hvor i opptaket meldingen er, så er det greit med et signal som signaliserer dette. Det viser seg at noen slike signal er bedre egnet enn andre. Mine tips er å se på [Barker code](https://en.wikipedia.org/wiki/Barker_code) eller [MLS](https://en.wikipedia.org/wiki/Maximum_length_sequence).
 
-Valg av frekvenser vil ha en stor påvirkning på hvor godt kommunikasjonssystemet deres fungerer. Velg med omhu! Unngå å velg de samme frekvensene som de rundt deg.
+Valg av frekvenser vil ha en stor påvirkning på hvor godt kommunikasjonssystemet deres fungerer. Velg med omhu! Unngå å velg de samme frekvensene som de rundt deg. Hvis dere trenger inspirasjon, kan dere se på den gamle standarden [Bell 202](https://en.wikipedia.org/wiki/Bell_202).
 
 ## Raspberry Pi oppsett
 1. Last ned Raspberry Pi Imager 
