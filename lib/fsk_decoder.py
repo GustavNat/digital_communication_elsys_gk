@@ -80,20 +80,7 @@ def decode_bits(signal, sample_rate, f0, f1, bit_time):
     return (e1 > e0).astype(int).tolist()
 
 
-def find_stop(bits, stop_signal, bits_per_symbol):
-    # Scans through the decoded bits looking for the known stop sequence.
-    # Only checks at symbol-aligned positions
-    # Returns the index where the stop sequence starts, or the total length if it is never found.
-    n = len(stop_signal)
-    for i in range(0, len(bits) - n + 1, bits_per_symbol):
-        errors = sum(a != b for a, b in zip(bits[i:i+n], stop_signal))
-        if errors < 1:
-            return i
-    return len(bits)
-
-
-def fsk_decoder(path, f0, f1, bit_time, bits_per_symbol,
-                start_signal=None, stop_signal=None, channels=1, channel=0):
+def fsk_decoder(path, f0, f1, bit_time, start_signal=None, channels=1, channel=0):
     """
     Decode an FSK recording and return a list of bits.
 
@@ -101,11 +88,8 @@ def fsk_decoder(path, f0, f1, bit_time, bits_per_symbol,
     f0:           Frequency (Hz) used for bit 0 by the transmitter.
     f1:           Frequency (Hz) used for bit 1 by the transmitter.
     bit_time:     How long one bit lasts in seconds.
-    bits_per_symbol: Number of bits per symbol.
     start_signal: Known bit sequence marking the start of the message.
                   If not given, decoding starts from the beginning of the file.
-    stop_signal:  Known bit sequence marking the end of the message.
-                  If not given, decoding continues to the end of the file.
     channel:      Which ADC channel to decode (default 0).
     """
     sample_period, data = raspi_import(path, channels=channels)
@@ -119,9 +103,5 @@ def fsk_decoder(path, f0, f1, bit_time, bits_per_symbol,
         bits = decode_bits(signal[payload_sample:], sample_rate, f0, f1, bit_time)
     else:
         bits = decode_bits(signal, sample_rate, f0, f1, bit_time)
-
-    if stop_signal is not None:
-        stop_idx = find_stop(bits, stop_signal, bits_per_symbol)
-        bits = bits[:stop_idx]
 
     return bits
