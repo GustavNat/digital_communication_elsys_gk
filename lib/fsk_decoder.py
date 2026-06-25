@@ -1,7 +1,7 @@
 import sys
 import numpy as np
 from scipy.signal import butter, filtfilt
-from raspi_import import raspi_import
+from lib.raspi_import import raspi_import
 
 
 def bandpass(signal, sample_rate, f0, f1):
@@ -10,7 +10,9 @@ def bandpass(signal, sample_rate, f0, f1):
     f_low, f_high = min(f0, f1), max(f0, f1)
     margin = (f_high - f_low) / 2
     nyq = sample_rate / 2
-    b, a = butter(4, [(f_low - margin) / nyq, (f_high + margin) / nyq], btype='band')
+    low  = np.clip((f_low  - margin) / nyq, 1e-6, 1 - 1e-6)
+    high = np.clip((f_high + margin) / nyq, 1e-6, 1 - 1e-6)
+    b, a = butter(4, [low, high], btype='band')
     return filtfilt(b, a, signal)
 
 

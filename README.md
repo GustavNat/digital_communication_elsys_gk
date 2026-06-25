@@ -1,6 +1,8 @@
 # Digital kommunikasjon
 
-Digital kommunikasjon handler om å sende informasjon fra én enhet til en annen. Informasjonen kan være tekst, lyd, bilde, video eller sensordata. Hvordan informasjonen sendes avhenger blant annet av datatype, avstand, hastighet, sikkerhet og hvor mye støy det er i omgivelsene.
+Digital kommunikasjon handler om å sende informasjon fra en enhet til en annen. Informasjonen kan være tekst, lyd, bilde, video eller sensordata. Hvordan informasjonen sendes avhenger av datatype, avstand, hastighet, sikkerhet og hvor mye støy det er i omgivelsene.
+
+Dere skal 
 
 I dette prosjektet skal dere gjøre det på en litt upraktisk, men lærerik måte: Dere skal sende digitale bits som lyd. En ESP32 spiller av to ulike frekvenser gjennom en høyttaler, og en Raspberry Pi bruker mikrofon til å finne ut hva som ble sendt.
 
@@ -18,21 +20,29 @@ En **ADC** eller **Analog-to-Digital Converter** er en komponent som gjør om et
 
 Dere har fått noen filer som hjelper dere med prosjektet. Dere trenger ikke å forstå hva som skjer inni filene – det viktige er å vite hvordan dere bruker dem.
 
-### [`adc_sampler.c`](adc_sampler.c)
+### [`c/adc_sampler.c`](c/adc_sampler.c)
 
 Tar opp lyd/signal fra ADC-en og lagrer det i minnet.
 
-For å kjøre denne bruker dere `subprocess.run()` fra Python.
+### [`lib/adc_sampler.py`](lib/adc_sampler.py)
 
-### [`raspi_import.py`](raspi_import.py)
+Gjør det enkelt å starte et opptak fra Python. Den eneste funksjonen dere trenger å bruke er `record()`:
+
+```python
+from lib.adc_sampler import record
+
+record(duration, output_file)
+```
+
+### [`lib/raspi_import.py`](lib/raspi_import.py)
 
 Konverterer ADC-dataen til et Python-array.
 
 Dere trenger ikke å tenke på denne – den brukes automatisk av `fsk_decoder.py`.
 
-### [`fsk_decoder.py`](fsk_decoder.py)
+### [`lib/fsk_decoder.py`](lib/fsk_decoder.py)
 
-Tar ADC-dataen og gjør om signalet til en liste med 0-er og 1-er ved hjelp av fiffig signalbehandling. Den eneste funksjonen dere trenger å bruke er [`fsk_decoder()`](fsk_decoder.py#L93 "Decode an FSK recording and return a list of bits. Parametere: path, f0, f1, bit_time, bits_per_symbol, start_signal, stop_signal, channel"):
+Tar ADC-dataen og gjør om signalet til en liste med 0-er og 1-er ved hjelp av fiffig signalbehandling. Den eneste funksjonen dere trenger å bruke er [`fsk_decoder()`](lib/fsk_decoder.py#L93 "Decode an FSK recording and return a list of bits. Parametere: path, f0, f1, bit_time, bits_per_symbol, start_signal, stop_signal, channel"):
 
 For at mottaker skal vite hvor i opptaket meldingen er, så er det greit med et signal som signaliserer dette. Det viser seg at noen slike signal er bedre egnet enn andre. Mine tips er å se på [Barker code](https://en.wikipedia.org/wiki/Barker_code) eller [MLS](https://en.wikipedia.org/wiki/Maximum_length_sequence).
 
@@ -154,7 +164,9 @@ Når dere er koblet til, kan dere dra filer mellom laptopen og Raspberry Pi-en. 
 For å kjøre kode på raspberry pi må dere først skrive i terminalen:
 
 ```bash
+cd c
 make
+cd ..
 ```
 
 og så:
