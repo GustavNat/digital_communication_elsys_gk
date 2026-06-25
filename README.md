@@ -12,6 +12,8 @@ Langt fra ferdig! Her må det være en forklaring av oppsettet og komponentene. 
 
 ESP32 -> Høytaler -> Mikrofon -> ADC -> Raspberry pi
 
+En **ADC** eller **Analog-to-Digital Converter** er en komponent som gjør om et analogt signal til digitale tall.
+
 ## Kode
 
 Dere får litt hjelp med å sette i gang.
