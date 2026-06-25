@@ -32,9 +32,7 @@ Dere trenger ikke å tenke på denne – den brukes automatisk av `fsk_decoder.p
 
 ### [`fsk_decoder.py`](fsk_decoder.py)
 
-Tar ADC-dataen og gjør om signalet til en liste med 0-er og 1-er ved hjelp av signalbehandling.
-
-Den eneste funksjonen dere trenger å bruke er [`fsk_decoder()`](fsk_decoder.py#L93 "Decode an FSK recording and return a list of bits. Parametere: path, f0, f1, bit_time, bits_per_symbol, start_signal, stop_signal, channel"):
+Tar ADC-dataen og gjør om signalet til en liste med 0-er og 1-er ved hjelp av fiffig signalbehandling. Den eneste funksjonen dere trenger å bruke er [`fsk_decoder()`](fsk_decoder.py#L93 "Decode an FSK recording and return a list of bits. Parametere: path, f0, f1, bit_time, bits_per_symbol, start_signal, stop_signal, channel"):
 
 For at mottaker skal vite hvor i opptaket meldingen er, så er det greit med et signal som signaliserer dette. Det viser seg at noen slike signal er bedre egnet enn andre. Mine tips er å se på [Barker code](https://en.wikipedia.org/wiki/Barker_code) eller [MLS](https://en.wikipedia.org/wiki/Maximum_length_sequence).
 
@@ -69,17 +67,26 @@ For å koble til Raspberry Pi-en, åpne terminalen og skriv:
   ssh pi@<hostname>.local
   ```
 
-Om dere ikke får koblet til så se på feilsøkingstipsene nedenfor:
-* Prøv å bruke IPv4-adressen til PI-en istedenfor ```<hostname>.local```. Den finner dere vanligvis i nettverksdelingsinnstillingene på mobilen og har på formatet ```<xxx.xxx.xxx.xxx>```, hvor x er tall. Kommandoen blir da f.eks. ```ssh pi@192.168.195.162```.
-* Det kan ta litt tid før Pi-en starter, så om den ikke finner Pi-en med en gang, vent noen minutter og prøv igjen. Dere kan også trykke piltast opp på tastaturet for å bruke den siste kommandoen dere brukte.
-* Dobbeltsjekk også at det delte nettet opererer på 2.4GHz. På iPhone gjøres dette ved å gå inn i "settings"->"personal hotspot", og skru på "maximise compatibility".
-* Hvis dere har koblet dere av internettet og på et annet en eller annen gang i løpet av dagen så kan det hende programmet ikke gjenkjenner igjen ip-adressen. Ta å skriv på SD kortet igjen, men denne gangen endre brukernavnet til noe annet enn gruppenavnet. Brukernavnet kan dermed ikke være det samme som det noen andre har brukt før.
+<details>
+<summary>Får dere ikke koblet til? Se feilsøkingstips her</summary>
 
-Tips til å skrive i terminalen:
-- Grunnleggende terminalkommandoer for navigering:
-  - **`cd <directory>`**: Bytter katalog. Denne kommandoen lar deg navigere mellom forskjellige mapper på datamaskinen din. For eksempel, `cd Documents` vil navigere til Documents-mappen fra din nåværende lokasjon.
-  - **`ls`**: List opp innholdet i den nåværende mappen. Denne kommandoen viser alle filer og mapper i den nåværende mappen, hvor mapper vil dukke opp i blått.
-  - **`cd ..`**: Gå opp ett nivå i mappestrukturen. Dette tar deg tilbake til mappen som inneholder den nåværende mappen.
+* Prøv å bruke IPv4-adressen til PI-en istedenfor `<hostname>.local`. Den finner dere vanligvis i nettverksdelingsinnstillingene på mobilen og har på formatet `xxx.xxx.xxx.xxx`. Kommandoen blir da f.eks. `ssh pi@192.168.195.162`.
+* Det kan ta litt tid før Pi-en starter, så om den ikke finner Pi-en med en gang, vent noen minutter og prøv igjen. Dere kan også trykke piltast opp på tastaturet for å bruke den siste kommandoen dere brukte.
+* Dobbeltsjekk også at det delte nettet opererer på 2.4GHz. På iPhone gjøres dette ved å gå inn i "settings" → "personal hotspot", og skru på "maximise compatibility".
+* Hvis dere har koblet dere av og på et annet nettverk i løpet av dagen, kan det hende programmet ikke gjenkjenner IP-adressen. Skriv på SD-kortet igjen, men endre brukernavnet til noe annet enn det dere brukte sist.
+
+</details>
+
+<details>
+<summary>Tips til å skrive i terminalen</summary>
+
+Grunnleggende terminalkommandoer for navigering:
+
+- **`cd <directory>`**: Bytter katalog. For eksempel, `cd Documents` navigerer til Documents-mappen fra din nåværende lokasjon.
+- **`ls`**: Lister opp innholdet i den nåværende mappen. Mapper vises i blått.
+- **`cd ..`**: Gå opp ett nivå i mappestrukturen, tilbake til mappen som inneholder den nåværende mappen.
+
+</details>
 
 ## Installere pigpio
 
