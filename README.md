@@ -16,13 +16,25 @@ En **ADC** eller **Analog-to-Digital Converter** er en komponent som gjør om et
 
 ## Kode
 
-Dere får litt hjelp med å sette i gang.
+Dere har fått noen filer som hjelper dere med prosjektet. Dere trenger ikke å forstå hva som skjer inni filene – det viktige er å vite hvordan dere bruker dem.
 
-- `adc_sampler.c` tar opp data fra ADC-en og skriver det rett til minne.
-- `raspi_import.py` konverterer ADC-dataen til et array.
-- `fsk_decoder.py` tar arrayet og ved hjelp av litt fiffig signalbehandling gir ut en liste med nuller og enere.
+### [`adc_sampler.c`](adc_sampler.c)
 
-I `main.py` er det et lite eksempel på hvordan disse filene kan brukes. Hvis dere holder pekeren over `fsk_decoder()` vil det dukke opp en kort forklaring av funksjonen.
+Tar opp lyd/signal fra ADC-en og lagrer det i minnet.
+
+For å kjøre denne bruker dere `subprocess.run()` fra Python.
+
+### [`raspi_import.py`](raspi_import.py)
+
+Konverterer ADC-dataen til et Python-array.
+
+Dere trenger ikke å tenke på denne – den brukes automatisk av `fsk_decoder.py`.
+
+### [`fsk_decoder.py`](fsk_decoder.py)
+
+Tar ADC-dataen og gjør om signalet til en liste med 0-er og 1-er ved hjelp av signalbehandling.
+
+Den eneste funksjonen dere trenger å bruke er [`fsk_decoder()`](fsk_decoder.py#L93 "Decode an FSK recording and return a list of bits. Parametere: path, f0, f1, bit_time, bits_per_symbol, start_signal, stop_signal, channel"):
 
 For at mottaker skal vite hvor i opptaket meldingen er, så er det greit med et signal som signaliserer dette. Det viser seg at noen slike signal er bedre egnet enn andre. Mine tips er å se på [Barker code](https://en.wikipedia.org/wiki/Barker_code) eller [MLS](https://en.wikipedia.org/wiki/Maximum_length_sequence).
 
