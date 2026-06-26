@@ -8,19 +8,31 @@ Metoden kalles **FSK**, eller [Frequency Shift Keying](https://en.wikipedia.org/
 
 ## Oppsett
 
-Langt fra ferdig! Her må det være en forklaring av oppsettet og komponentene. Kretsdiagram!
+ESP32 → Høyttaler → Mikrofon → ADC → Raspberry Pi
 
-ESP32 -> Høytaler -> Mikrofon -> ADC -> Raspberry pi
+#### Høyttaler – [SM200508-1](https://dbunlimitedco.com/images/product_images/2D-Drawings/SM200508-1.pdf)
 
-En **ADC** eller **Analog-to-Digital Converter** er en komponent som gjør om et analogt signal til digitale tall.
+En liten høyttaler som gjør om det elektriske signalet fra ESP32 til lyd.
+
+#### Mikrofon – [MAX9814](https://www.analog.com/media/en/technical-documentation/data-sheets/max9814.pdf)
+
+MAX9814 er en mikrofonforsterker med automatisk forsterkerregulering (AGC). Den fanger opp lyden fra høyttaleren og forsterker signalet slik at det er sterkt nok til å samples av ADC-en.
+
+#### ADC – [MCP3201](https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/21293C.pdf)
+
+En **ADC** (Analog-to-Digital Converter) gjør om et analogt signal til digitale tall. MCP3201 er en 10-bits ADC som kommuniserer med Raspberry Pi via SPI. 
+
+#### ESP32
+
+ESP32 er senderen. Den spiller av to ulike frekvenser gjennom høyttaleren.
+
+#### Raspberry Pi
+
+Raspberry Pi er mottakeren. Den tar opp signalet fra ADC-en og dekoder bitene.
 
 ## Kode
 
-Dere har fått noen filer som hjelper dere med prosjektet. Dere trenger ikke å forstå hva som skjer inni filene – det viktige er å vite hvordan dere bruker dem.
-
-### [`c/adc_sampler.c`](c/adc_sampler.c)
-
-Tar opp lyd/signal fra ADC-en og lagrer det i minnet.
+Dere har fått noen filer som hjelper dere med prosjektet. Dere trenger ikke å forstå hva som skjer inni filene, det viktige er å vite hvordan dere bruker dem.
 
 ### [`lib/adc_sampler.py`](lib/adc_sampler.py)
 
@@ -36,7 +48,7 @@ record(duration, output_file)
 
 Konverterer ADC-dataen til et Python-array.
 
-Dere trenger ikke å tenke på denne – den brukes automatisk av `fsk_decoder.py`.
+Dere trenger ikke å tenke på denne. Den brukes automatisk av `fsk_decoder.py`.
 
 ### [`lib/fsk_decoder.py`](lib/fsk_decoder.py)
 
