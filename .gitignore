@@ -1,5 +1,4 @@
 __pycache__/
 *.pyc
-data/room_test2.dat
-data/test.dat
-recording.bin
+*.bin
+*.dat
