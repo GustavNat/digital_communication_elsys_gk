@@ -2,37 +2,36 @@
 
 Digital kommunikasjon handler om å sende informasjon fra en enhet til en annen. Informasjonen kan være tekst, lyd, bilde, video eller sensordata. Hvordan informasjonen sendes avhenger av datatype, avstand, hastighet, sikkerhet og hvor mye støy det er i omgivelsene.
 
-I dette prosjektet skal dere gjøre det på en litt upraktisk, men lærerik måte: Dere skal sende digitale bits som lyd. En ESP32 spiller av to ulike frekvenser gjennom en høyttaler, og en Raspberry Pi bruker mikrofon til å finne ut hva som ble sendt.
+I dette prosjektet skal dere lage et kommunikasjonsystem på en litt upraktisk, men lærerik måte: Dere skal sende digitale bits som lyd. En ESP32 spiller av to ulike frekvenser gjennom en høyttaler, og en Raspberry Pi bruker mikrofon til å finne ut hva som ble sendt.
 
 Metoden kalles **FSK**, eller [Frequency Shift Keying](https://en.wikipedia.org/wiki/Frequency-shift_keying). Ideen er enkel: en frekvens betyr `0`, og en annen frekvens betyr `1`. Selv om dette prosjektet bruker lyd, er prinsippet det samme som i mange ekte kommunikasjonssystemer. Bluetooth LE bruker en variant kalt **GFSK**, eller **Gaussian Frequency Shift Keying**.
 
 ## Oppsett
 
-ESP32 → Høyttaler → Mikrofon → ADC → Raspberry Pi
+Systemet består av en sender og en mottaker. ESP32-en sender et lydsignal gjennom høyttaleren. Mikrofonen plukker opp lyden, forsterker den, og sender det analoge signalet videre til en ADC (analog-to-digital-converter). ADC-en konverterer signalet til digitale tall som Raspberry Pi-en kan lese.
 
-#### Høyttaler – [SM200508-1](https://dbunlimitedco.com/images/product_images/2D-Drawings/SM200508-1.pdf)
+### Høyttaler – [SM200508-1](https://dbunlimitedco.com/images/product_images/2D-Drawings/SM200508-1.pdf)
 
 En liten høyttaler som gjør om det elektriske signalet fra ESP32 til lyd.
 
-#### Mikrofon – [MAX9814](https://www.analog.com/media/en/technical-documentation/data-sheets/max9814.pdf)
+### Mikrofon – [MAX9814](https://www.analog.com/media/en/technical-documentation/data-sheets/max9814.pdf)
 
 MAX9814 er en mikrofonforsterker med automatisk forsterkerregulering (AGC). Den fanger opp lyden fra høyttaleren og forsterker signalet slik at det er sterkt nok til å samples av ADC-en.
 
-#### ADC – [MCP3201](https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/21293C.pdf)
+### ADC – [MCP3001](https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/21293C.pdf)
 
-En **ADC** (Analog-to-Digital Converter) gjør om et analogt signal til digitale tall. MCP3201 er en 10-bits ADC som kommuniserer med Raspberry Pi via SPI. 
+En **ADC** (Analog-to-Digital Converter) gjør om et analogt signal til digitale tall. MCP3201 er en 10-bits ADC som kommuniserer med Raspberry Pi via SPI.
 
-#### ESP32
 
-ESP32 er senderen. Den spiller av to ulike frekvenser gjennom høyttaleren.
+![Raspberry Pi oppsett](rasp_pi.png)
 
-#### Raspberry Pi
 
-Raspberry Pi er mottakeren. Den tar opp signalet fra ADC-en og dekoder bitene.
+![Kretsdiagram](kretsdiagram.png)
+
 
 ## Kode
 
-Dere har fått noen filer som hjelper dere med prosjektet. Dere trenger ikke å forstå hva som skjer inni filene, det viktige er å vite hvordan dere bruker dem.
+Dere har fått noen filer som hjelper dere med prosjektet. Dere trenger ikke å forstå hva som skjer inni filene, bare hvordan dere bruker dem 
 
 ### [`lib/adc_sampler.py`](lib/adc_sampler.py)
 
